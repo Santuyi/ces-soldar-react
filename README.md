@@ -1,7 +1,7 @@
 # CES Soldar
 
-CES Soldar es un e-commerce en desarrollo para la venta de maquinas, insumos y
-accesorios para soldadura.
+CES Soldar es un e-commerce en desarrollo para la venta de maquinas,
+herramientas e insumos para soldadura.
 
 Este proyecto forma parte del curso de React JS de Coderhouse y se construira de
 manera progresiva durante las pre-entregas.

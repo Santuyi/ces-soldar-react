@@ -7,8 +7,7 @@ function App() {
         <p className="hero__eyebrow">E-commerce en construccion</p>
         <h1>CES Soldar</h1>
         <p className="hero__description">
-          Tienda online especializada en maquinas, insumos y accesorios para
-          soldadura.
+          Tienda online de maquinas, herramientas e insumos para soldadura.
         </p>
       </section>
     </main>
