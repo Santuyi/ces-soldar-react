@@ -15,6 +15,8 @@ manera progresiva durante las pre-entregas.
 
 ## Instalacion
 
+Requisito previo: Node.js 20.19 o superior.
+
 Para instalar las dependencias del proyecto, ejecutar:
 
 ```bash
