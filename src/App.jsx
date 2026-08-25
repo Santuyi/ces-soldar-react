@@ -1,16 +1,15 @@
 import './App.css'
+import ItemListContainer from './components/ItemListContainer'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
-    <main className="app">
-      <section className="hero">
-        <p className="hero__eyebrow">E-commerce en construccion</p>
-        <h1>CES Soldar</h1>
-        <p className="hero__description">
-          Tienda online de maquinas, herramientas e insumos para soldadura.
-        </p>
-      </section>
-    </main>
+    <>
+      <Navbar />
+      <main className="app">
+        <ItemListContainer greeting="Bienvenidos a CES Soldar" />
+      </main>
+    </>
   )
 }
 

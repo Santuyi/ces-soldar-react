@@ -13,6 +13,15 @@ manera progresiva durante las pre-entregas.
 - JavaScript
 - CSS
 
+## Componentes principales
+
+- `Navbar`: muestra la marca CES Soldar, categorias de productos y el acceso al
+  carrito.
+- `CartWidget`: representa el carrito de compras con un icono y una cantidad de
+  productos hardcodeada.
+- `ItemListContainer`: recibe la prop `greeting` desde `App.jsx` y muestra el
+  mensaje principal de bienvenida.
+
 ## Instalacion
 
 Requisito previo: Node.js 20.19 o superior.

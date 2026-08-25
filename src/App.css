@@ -1,16 +1,90 @@
 .app {
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
   display: grid;
   place-items: center;
   padding: 48px 24px;
 }
 
-.hero {
+.navbar {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px clamp(20px, 5vw, 64px);
+  background: #111827;
+  border-bottom: 4px solid #f59e0b;
+  color: #f9fafb;
+}
+
+.navbar__brand {
+  color: #f9fafb;
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navbar__nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.navbar__link {
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #d1d5db;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.navbar__link:hover {
+  background: #374151;
+  color: #ffffff;
+}
+
+.cart-widget {
+  min-width: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #f59e0b;
+  color: #111827;
+  font-weight: 800;
+}
+
+.cart-widget__icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.cart-widget__quantity {
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 0.85rem;
+}
+
+.item-list-container {
   width: min(720px, 100%);
   text-align: center;
 }
 
-.hero__eyebrow {
+.item-list-container__eyebrow {
   margin: 0 0 16px;
   color: #d97706;
   font-size: 0.875rem;
@@ -19,16 +93,27 @@
   text-transform: uppercase;
 }
 
-.hero h1 {
+.item-list-container h1 {
   margin: 0;
   color: #1f2937;
   font-size: clamp(2.5rem, 8vw, 5rem);
   line-height: 1;
 }
 
-.hero__description {
+.item-list-container__description {
   margin: 24px auto 0;
   max-width: 560px;
   color: #4b5563;
   font-size: 1.125rem;
+}
+
+@media (max-width: 760px) {
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .navbar__nav {
+    justify-content: flex-start;
+  }
 }
