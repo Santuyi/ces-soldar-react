@@ -1,35 +1,15 @@
-import { useEffect, useState } from 'react'
-import { getProducts } from '../mock/asyncMock'
+import { useParams } from 'react-router-dom'
+import { getProducts } from '../services/products'
+import useAsync from '../hooks/useAsync'
 import ItemList from './ItemList'
+import Status from './Status'
 
-function ItemListContainer({ greeting }) {
-  const [items, setItems] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      const products = await getProducts()
-      setItems(products)
-      setLoading(false)
-    }
-
-    loadProducts()
-  }, [])
-
-  return (
-    <section className="item-list-container">
-      <p className="item-list-container__eyebrow">E-commerce en construccion</p>
-      <h1>{greeting}</h1>
-      <p className="item-list-container__description">
-        Tienda online de maquinas, herramientas e insumos para soldadura.
-      </p>
-      {loading ? (
-        <p className="item-list-container__loading">Cargando productos...</p>
-      ) : (
-        <ItemList products={items} />
-      )}
-    </section>
-  )
+export default function ItemListContainer() {
+  const { categoryId } = useParams()
+  const { data: items, loading, error, retry } = useAsync(getProducts, categoryId)
+  return <section>
+    <div className="page-heading"><p className="eyebrow">Equipamiento para tu taller</p><h1>{categoryId || 'CES Soldar'}</h1><p>Maquinas, herramientas e insumos para soldadura.</p></div>
+    <div className="section-heading"><h2>{categoryId ? 'Productos de la categoria' : 'Catalogo de productos'}</h2>{items && <span>{items.length} productos</span>}</div>
+    {loading ? <Status loading>Cargando productos...</Status> : error ? <Status error={error} retry={retry} /> : items.length ? <ItemList products={items} /> : <Status>No hay productos disponibles en esta categoria.</Status>}
+  </section>
 }
-
-export default ItemListContainer

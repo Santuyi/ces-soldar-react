@@ -1,67 +1,79 @@
 # CES Soldar
 
-CES Soldar es un e-commerce en desarrollo para la venta de maquinas,
-herramientas e insumos para soldadura.
+Proyecto final del curso React JS de Coderhouse: tienda educativa de maquinas,
+herramientas e insumos para soldadura. No procesa pagos reales.
 
-Este proyecto forma parte del curso de React JS de Coderhouse y se construira de
-manera progresiva durante las pre-entregas.
+## Tecnologias
 
-## Tecnologias utilizadas
+React 19, JavaScript, Vite, React Router, Firebase Authentication, Cloud Firestore,
+Context API, CSS y Lucide React. Despliegue previsto en Vercel.
 
-- React
-- Vite
-- JavaScript
-- CSS
+## Instalacion y desarrollo
 
-## Componentes principales
-
-- `Navbar`: muestra la marca CES Soldar, categorias de productos y el acceso al
-  carrito.
-- `CartWidget`: representa el carrito de compras con un icono y una cantidad de
-  productos hardcodeada.
-- `ItemListContainer`: recibe la prop `greeting` desde `App.jsx` y muestra el
-  mensaje principal de bienvenida. Tambien obtiene los productos desde una
-  promesa local y los guarda en el estado `items`.
-- `ItemList`: recibe los productos por props y los recorre con `.map()` para
-  renderizar una card por cada producto.
-- `Item`: muestra la informacion individual de cada producto.
-- `ItemDetailContainer`: recibe un identificador de producto, obtiene el detalle
-  desde una promesa y administra los estados de carga y error.
-- `ItemDetail`: recibe el producto por props y renderiza la vista completa de
-  detalle.
-- `ItemCount`: recibe el stock disponible por props y permite seleccionar una
-  cantidad respetando los limites del producto.
-
-## Simulacion de datos
-
-El archivo `src/mock/asyncMock.js` contiene un array de productos de CES Soldar y
-exporta las funciones `getProducts` y `getProductById`.
-
-`getProducts` devuelve una `Promise` que se resuelve despues de 2 segundos con
-los productos. En `ItemListContainer`, la carga se ejecuta una sola vez con
-`useEffect`, se guarda el resultado en el estado `items` y luego se renderiza el
-listado mediante `ItemList`.
-
-`getProductById` recibe un `id` de producto, busca ese producto dentro del array
-y devuelve una `Promise` con el resultado. En caso de no encontrarlo, la promesa
-se rechaza para que `ItemDetailContainer` pueda mostrar un mensaje de error.
-
-## Instalacion
-
-Requisito previo: Node.js 20.19 o superior.
-
-Para instalar las dependencias del proyecto, ejecutar:
+Requiere Node.js compatible con Vite (20.19+ o 22.12+).
 
 ```bash
 npm install
 ```
 
-## Ejecucion
-
-Para iniciar el entorno de desarrollo, ejecutar:
+Crear `.env.local` a partir de `.env.example` y completar las seis variables
+`VITE_FIREBASE_*` con la configuracion de una aplicacion web de Firebase.
+No incluir cuentas de servicio ni claves privadas en variables VITE: estas
+variables forman parte del codigo publico del navegador.
 
 ```bash
 npm run dev
+npm run build
+npm run lint
+node --test tests/cart.test.js
 ```
 
-Luego abrir la URL local que indique la terminal.
+## Funcionalidades
+
+- Catalogo y categorias obtenidos de Firestore, sin datos mock de respaldo.
+- Detalle de producto con descripcion, imagen, precio y stock.
+- Carrito persistido en el navegador, cantidades limitadas por stock y totales.
+- Registro, inicio y cierre de sesion con Firebase email/password.
+- Checkout protegido: datos de entrega, validacion de precios y disponibilidad.
+- Orden en Firestore con usuario, comprador, productos, total y fecha del servidor.
+- Confirmacion con ID; el carrito se vacia solo cuando la orden se guarda.
+- Estados de carga, error, categoria vacia y producto inexistente.
+
+## Organizacion
+
+`src/components` contiene las vistas reutilizables del catalogo.
+`src/pages` contiene carrito, acceso y checkout.
+`src/context` administra sesion y carrito; `src/hooks` administra carga asincrona.
+`src/services` concentra Firebase y las consultas de productos y ordenes.
+`tests` incluye pruebas del reducer del carrito.
+
+## Firebase
+
+Habilitar Authentication con email/password y una base Cloud Firestore Standard.
+Publicar `firestore.rules` desde la consola. Los productos tienen lectura publica
+y solo se administran desde la consola; cada usuario accede unicamente a sus
+ordenes. Las reglas validan precios, cantidades, propietario y total.
+
+Coleccion `products`: documentos con `name`, `category`, `description`, `img`
+(strings), `price` (numero) y `stock` (entero). El ID del documento identifica
+el producto. Las imagenes locales se encuentran en `public/products`.
+
+Coleccion `orders`: se crea al confirmar la primera compra. Las reglas admiten
+hasta cinco productos distintos por orden, correspondientes al catalogo actual;
+si el catalogo crece, ampliar esa validacion antes de publicar.
+La compra valida disponibilidad, pero no descuenta inventario ni procesa pagos.
+
+## Publicacion en Vercel
+
+Importar el repositorio como proyecto Vite. Build: `npm run build`; salida: `dist`.
+Configurar las mismas variables de `.env.example` en el entorno Production.
+Agregar el dominio definitivo en Firebase Authentication > Configuracion >
+Dominios autorizados. `vercel.json` permite recargar rutas internas sin error 404.
+
+## Comprobacion manual
+
+Probar catalogo, categorias, detalle y una ruta inexistente. Agregar varias
+cantidades y verificar limites, totales y persistencia al recargar. Comprobar
+registro, cierre e inicio de sesion, y checkout sin acceso. Confirmar una orden
+con datos de prueba y verificar su ID en Firestore y el carrito vacio.
+Repetir en la URL publicada y en una pantalla angosta antes de entregar.

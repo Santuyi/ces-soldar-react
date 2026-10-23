@@ -1,32 +1,11 @@
 import { useState } from 'react'
-
-function ItemCount({ stock, initial = 1 }) {
-  const [quantity, setQuantity] = useState(initial)
-
-  const decrease = () => {
-    setQuantity((currentQuantity) => Math.max(currentQuantity - 1, 1))
-  }
-
-  const increase = () => {
-    setQuantity((currentQuantity) => Math.min(currentQuantity + 1, stock))
-  }
-
-  return (
-    <div className="item-count">
-      <div className="item-count__controls" aria-label="Selector de cantidad">
-        <button type="button" onClick={decrease} disabled={quantity === 1}>
-          -
-        </button>
-        <span>{quantity}</span>
-        <button type="button" onClick={increase} disabled={quantity === stock}>
-          +
-        </button>
-      </div>
-      <button className="item-count__add" type="button">
-        Agregar al carrito
-      </button>
-    </div>
-  )
+import { Minus, Plus, ShoppingCart } from 'lucide-react'
+export default function ItemCount({ stock, onAdd }) {
+  const [selected, setSelected] = useState(1)
+  const quantity = Math.max(0, Math.min(selected, stock))
+  return <div className="item-count"><div className="item-count__controls" aria-label="Cantidad">
+    <button type="button" title="Restar una unidad" aria-label="Restar una unidad" disabled={quantity <= 1} onClick={() => setSelected(quantity - 1)}><Minus size={18} /></button>
+    <output aria-live="polite" aria-label="Cantidad seleccionada">{quantity}</output>
+    <button type="button" title="Sumar una unidad" aria-label="Sumar una unidad" disabled={quantity >= stock} onClick={() => setSelected(quantity + 1)}><Plus size={18} /></button>
+  </div><button className="primary" type="button" disabled={quantity === 0} onClick={() => onAdd(quantity)}><ShoppingCart size={18} />{stock > 0 ? 'Agregar al carrito' : 'Sin stock disponible'}</button></div>
 }
-
-export default ItemCount

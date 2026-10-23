@@ -1,19 +1,13 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: #111827;
-  background: #f8fafc;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
-}
+:root { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #252c28; background: #f8faf9; font-synthesis: none; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; letter-spacing: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+h1, h2, h3, p, a, label { overflow-wrap: anywhere; }
+h1 { font-size: 32px; line-height: 1.2; }
+h2 { font-size: 24px; }
+a { color: inherit; text-underline-offset: 3px; }
+button, .primary { font: inherit; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 16px; border: 1px solid #bec9c2; border-radius: 4px; background: #fff; color: #252c28; cursor: pointer; text-decoration: none; }
+button:hover, .icon-button:hover { background: #e9efec; }
+.primary { background: #b0232c; border-color: #b0232c; color: white; font-weight: 650; }
+.primary:hover { background: #911b24; }
+button:disabled { cursor: not-allowed; opacity: .5; }
+:focus-visible { outline: 3px solid #2d7958; outline-offset: 3px; }
