@@ -3,10 +3,12 @@
 Proyecto final del curso React JS de Coderhouse: tienda educativa de maquinas,
 herramientas e insumos para soldadura. No procesa pagos reales.
 
+Tienda publicada: https://ces-soldar-react.vercel.app/
+
 ## Tecnologias
 
 React 19, JavaScript, Vite, React Router, Firebase Authentication, Cloud Firestore,
-Context API, CSS y Lucide React. Despliegue previsto en Vercel.
+Context API, CSS y Lucide React. Desplegado en Vercel.
 
 ## Instalacion y desarrollo
 
